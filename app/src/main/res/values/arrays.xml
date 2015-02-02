@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="image_size_options">
+        <item>all</item>
+        <item>icon</item>
+        <item>medium</item>
+        <item>xxlarge</item>
+        <item>huge</item>
+    </string-array>
+
+    <string-array name="image_type_options">
+        <item>all</item>
+        <item>face</item>
+        <item>photo</item>
+        <item>clipart</item>
+        <item>lineart</item>
+    </string-array>
+
+    <string-array name="file_type_options">
+        <item>all</item>
+        <item>jpg</item>
+        <item>png</item>
+        <item>gif</item>
+        <item>bmp</item>
+    </string-array>
+
+
+</resources>
