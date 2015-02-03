@@ -1,6 +1,5 @@
 package com.yahoo.learn.android.imagesearch.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
@@ -9,10 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.support.v7.widget.SearchView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -118,6 +117,13 @@ public class SearchActivity extends ActionBarActivity {
         if (numResults >= MAX_RESULTS)
             return;
 
+        if (numResults % RESULTS_PER_PAGE != 0) {
+            Log.e("PAGE_BOUNDS_ERROR", "Current result set size " + numResults + " does not align with page bounds");
+            // Clear the results and reissue query
+            aResultsAdapter.clear();
+            numResults = 0;
+        }
+
         String queryURL = QUERY_URL + mQueryTerm + mSettings.getParamsString() +
                 ((numResults != 0) ? ("&start=" + numResults) : "");
 
@@ -145,9 +151,15 @@ public class SearchActivity extends ActionBarActivity {
 
         @Override
         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-            Log.i("INFO", response.toString());
+//            Log.i("INFO", response.toString());
             try {
                 JSONArray results = response.getJSONObject("responseData").getJSONArray("results");
+                if (results.length() == 0 && mImageResults.size() == 0) {
+                    // Empty result set
+                    // TODO: Use alerts instead, will do so when I learn about those
+                    Toast.makeText(SearchActivity.this, R.string.empty_result_message, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 aResultsAdapter.addAll(ImageResult.fromJSONArray(results));
             } catch (JSONException e) {
                 e.printStackTrace();

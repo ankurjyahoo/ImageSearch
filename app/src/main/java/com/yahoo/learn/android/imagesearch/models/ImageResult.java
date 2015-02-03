@@ -1,7 +1,5 @@
 package com.yahoo.learn.android.imagesearch.models;
 
-import com.yahoo.learn.android.imagesearch.activities.SearchActivity;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

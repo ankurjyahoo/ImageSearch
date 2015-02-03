@@ -7,7 +7,6 @@ import android.os.Parcelable;
  * Created by ankurj on 1/31/2015.
  */
 
-// TODO - change to Parcelable
 public class SearchSettings implements Parcelable {
     private static final String PARAM_DELIM = "&";
     private static final String PARAM_IS = "imgsz=";

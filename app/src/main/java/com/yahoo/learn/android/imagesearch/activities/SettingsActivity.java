@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.yahoo.learn.android.imagesearch.activities.R;
 import com.yahoo.learn.android.imagesearch.models.SearchSettings;
@@ -23,9 +24,6 @@ public class SettingsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        // Hide the action bar
-//        getActionBar().hide();
 
         mSpImageSize = (Spinner) findViewById(R.id.spImageSize);
         mSpImageType = (Spinner) findViewById(R.id.spImageType);
@@ -70,17 +68,28 @@ public class SettingsActivity extends ActionBarActivity {
     }
 
     public void settingsSubmit(View view) {
+        String site = mEtSite.getText().toString().trim();
+
+        // Ensure that site has no newlines
+        if (site.indexOf('\n') != -1) {
+            mEtSite.setText("");
+            // TODO: Change to alert
+            Toast.makeText(this, R.string.newline_in_site, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        mSearchSettings.setSite(site);
         mSearchSettings.setFileType(mSpFileType.getSelectedItem().toString());
         mSearchSettings.setFileTypeSpinnerPosition(mSpFileType.getSelectedItemPosition());
         mSearchSettings.setImageType(mSpImageType.getSelectedItem().toString());
         mSearchSettings.setImageTypeSpinnerPosition(mSpImageType.getSelectedItemPosition());
         mSearchSettings.setImageSize(mSpImageSize.getSelectedItem().toString());
         mSearchSettings.setImageSizeSpinnerPosition(mSpImageSize.getSelectedItemPosition());
-        mSearchSettings.setSite(mEtSite.getText().toString());
 
         Intent data = new Intent();
         data.putExtra(SearchActivity.EXTRA_SETTINGS, mSearchSettings);
         setResult(RESULT_OK, data);
+
         finish();
     }
 }

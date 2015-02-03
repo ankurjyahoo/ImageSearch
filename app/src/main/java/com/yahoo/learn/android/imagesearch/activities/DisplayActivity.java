@@ -20,7 +20,7 @@ public class DisplayActivity extends ActionBarActivity {
         setContentView(R.layout.activity_display);
 
         // Remove action bar
-        // getActionBar().hide();   // Throws a NullPointerException, why?
+        getSupportActionBar().hide();
 
         // Display the image
         mIvDisplay = (ImageView) findViewById(R.id.ivDisplay);

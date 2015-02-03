@@ -14,5 +14,7 @@
     <string name="image_type_prompt">Image Type</string>
     <string name="site_prompt">Site</string>
     <string name="settings_submit">Submit</string>
+    <string name="empty_result_message">Empty result set returned, please check your settings</string>
+    <string name="newline_in_site">Site contains newline, please re-enter</string>
 
 </resources>
