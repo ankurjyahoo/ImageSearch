@@ -15,5 +15,6 @@ Completed user stories
   * Site (espn.com)
 * User can tap on any image in results to see the image full-screen
 * User can scroll down “infinitely” to continue loading more image results (up to 8 pages)
+* Optional: Error message prompts for newlines in site, badly settings resulting in empty results 
 
 ![](https://github.com/ankurjyahoo/ImageSearch/blob/master/ImageSearch.gif)
